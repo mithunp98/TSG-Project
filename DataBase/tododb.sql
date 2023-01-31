@@ -41,6 +41,29 @@ LOCK TABLES `priority` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `statusdetails`
+--
+
+DROP TABLE IF EXISTS `statusdetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `statusdetails` (
+  `statusid` int NOT NULL AUTO_INCREMENT,
+  `statustitle` varchar(45) NOT NULL,
+  PRIMARY KEY (`statusid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `statusdetails`
+--
+
+LOCK TABLES `statusdetails` WRITE;
+/*!40000 ALTER TABLE `statusdetails` DISABLE KEYS */;
+/*!40000 ALTER TABLE `statusdetails` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tasklist`
 --
 
@@ -56,11 +79,14 @@ CREATE TABLE `tasklist` (
   `uid` int NOT NULL,
   `tasktypeid` int NOT NULL,
   `priorityid` int NOT NULL,
+  `statusid` int NOT NULL,
   PRIMARY KEY (`taskid`),
   KEY `uid_idx` (`uid`),
   KEY `tasktypeid_idx` (`tasktypeid`),
   KEY `priorityid_idx` (`priorityid`),
+  KEY `statusid_idx` (`statusid`),
   CONSTRAINT `priorityid` FOREIGN KEY (`priorityid`) REFERENCES `priority` (`priorityid`),
+  CONSTRAINT `statusid` FOREIGN KEY (`statusid`) REFERENCES `statusdetails` (`statusid`),
   CONSTRAINT `tasktypeid` FOREIGN KEY (`tasktypeid`) REFERENCES `tasktype` (`tasktypeid`),
   CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `userdetails` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -143,4 +169,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-31 14:50:43
+-- Dump completed on 2023-01-31 15:03:36
