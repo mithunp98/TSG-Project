@@ -41,6 +41,41 @@ LOCK TABLES `priority` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tasklist`
+--
+
+DROP TABLE IF EXISTS `tasklist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tasklist` (
+  `taskid` int NOT NULL AUTO_INCREMENT,
+  `tasktitle` varchar(45) NOT NULL,
+  `taskdescription` varchar(45) NOT NULL,
+  `taskstartdatetime` datetime(6) NOT NULL,
+  `taskenddatetime` datetime(6) NOT NULL,
+  `uid` int NOT NULL,
+  `tasktypeid` int NOT NULL,
+  `priorityid` int NOT NULL,
+  PRIMARY KEY (`taskid`),
+  KEY `uid_idx` (`uid`),
+  KEY `tasktypeid_idx` (`tasktypeid`),
+  KEY `priorityid_idx` (`priorityid`),
+  CONSTRAINT `priorityid` FOREIGN KEY (`priorityid`) REFERENCES `priority` (`priorityid`),
+  CONSTRAINT `tasktypeid` FOREIGN KEY (`tasktypeid`) REFERENCES `tasktype` (`tasktypeid`),
+  CONSTRAINT `uid` FOREIGN KEY (`uid`) REFERENCES `userdetails` (`uid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tasklist`
+--
+
+LOCK TABLES `tasklist` WRITE;
+/*!40000 ALTER TABLE `tasklist` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tasklist` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tasktype`
 --
 
@@ -108,4 +143,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-30 16:14:00
+-- Dump completed on 2023-01-31 14:50:43
